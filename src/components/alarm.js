@@ -1,4 +1,6 @@
-import React, { Component }  from 'react';
+import React, { Component, ReactDOM }  from 'react';
+import ClickNHold from 'react-click-n-hold'; 
+
 import './clock.css'
 
 export default  class Alarm extends Component {
@@ -11,7 +13,7 @@ export default  class Alarm extends Component {
 
     constructor(props) {
         super(props)
-        
+
         this.onHourChange = this.onHourChange.bind(this)
         this.onMinuteChange = this.onMinuteChange.bind(this)
         this.onSecondChange = this.onSecondChange.bind(this)
@@ -59,16 +61,18 @@ export default  class Alarm extends Component {
             if(currentTime.getSeconds() == this.state.second && 
                 currentTime.getMinutes() == this.state.minute && 
                 currentTime.getHours() == this.state.hour) {
-                console.log('xxx')
+                
+                const audio = document.getElementsByClassName('alarm-sound')[0]
+                audio.play();
             }
         }
     }
 
     componentDidMount() {
         setInterval(() => this.soundTheAlarm(), 1000)
-
-        
     }
+
+    
     
     render() {
         return (
@@ -77,7 +81,11 @@ export default  class Alarm extends Component {
                         <input type="number" className="hr-mn-sc" value={this.state.hour} onChange={this.onHourChange}/>                    
                         <input type="number" className="hr-mn-sc" value={this.state.minute} onChange={this.onMinuteChange}/> 
                         <input type="number" className="hr-mn-sc" value={this.state.second} onChange={this.onSecondChange}/>
+                        <audio className="alarm-sound">
+                            <source src="https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"></source>
+                        </audio>
                     </label>
+                    
             </div>
         );
     }

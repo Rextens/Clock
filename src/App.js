@@ -8,7 +8,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Alarm></Alarm>
         <ClockShield></ClockShield>
         <Clock></Clock>
       </header>
