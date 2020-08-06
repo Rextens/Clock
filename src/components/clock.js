@@ -16,6 +16,7 @@ export default  class Clock extends Component {
         this.mousePositionX = 0;
         this.mousePositionY = 0;
         this.alarmHandAngle = 0;
+        this.alarmRing = false;
 
         this.state={
             secondDeg: startSecondsDeg,
@@ -36,15 +37,19 @@ export default  class Clock extends Component {
 
         console.log(this.state.hourDeg - 360)
         if(this.state.hourDeg < 360) {        
-            if(Math.trunc(this.alarmHandAngle) == this.state.hourDeg) {
+            if(Math.trunc(this.alarmHandAngle) == Math.trunc(this.state.hourDeg) && this.alarmRing) {
                 const audio = document.getElementsByClassName('alarm-sound')[0]
                 audio.play();
+
+                this.alarmRing = false;
             }   
         }
         else {
-            if(Math.trunc(this.alarmHandAngle) == this.state.hourDeg - 360) {
+            if(Math.trunc(this.alarmHandAngle) == Math.trunc(this.state.hourDeg - 360) && this.alarmRing) {
                 const audio = document.getElementsByClassName('alarm-sound')[0]
                 audio.play();
+
+                this.alarmRing = false;
             }
         }
     }
@@ -71,6 +76,8 @@ export default  class Clock extends Component {
         
         $(document).off("mousemove")
         console.log(this.alarmHandAngle)
+
+        this.alarmRing = true;
     }
     
     render() {

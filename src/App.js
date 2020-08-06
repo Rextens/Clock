@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Clock from './components/clock'
-import Alarm from './components/alarm';
 import ClockShield from './components/clockShield'
 
 function App() {
